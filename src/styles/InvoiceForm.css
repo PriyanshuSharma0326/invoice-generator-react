@@ -1,0 +1,22 @@
+.form-container {
+    display: flex;
+}
+
+.form-main {
+    flex: 0.7;
+
+    display: flex;
+}
+
+.invoice-form {
+    padding: 2rem;
+    width: 90%;
+    border: 1px solid red;
+    margin-left: auto;
+    margin-right: 1rem;
+    margin-top: 1rem;
+}
+
+.form-review-section {
+    flex: 0.3;
+}
