@@ -17,6 +17,22 @@
     margin-top: 1rem;
 }
 
+.form-date-section {
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-bill-info-section {
+    display: flex;
+    gap: 1rem;
+}
+
+.bill-info {
+    flex: 0.5;
+    display: flex;
+    flex-direction: column;
+}
+
 .form-review-section {
     flex: 0.3;
 }

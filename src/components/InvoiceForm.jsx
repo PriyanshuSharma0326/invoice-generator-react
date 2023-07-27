@@ -25,6 +25,24 @@ function InvoiceForm() {
                             <input type="number" name="invoice-number" id="invoice-number" />
                         </div>
                     </div>
+
+                    <div className="form-bill-info-section">
+                        <div className="bill-info">
+                            <p>Bill to:</p>
+
+                            <input placeholder='Who is this invoice to?' type="text" name="invoice-to" id="bill-to" />
+                            <input placeholder='Email address' type="text" name="" id="email" />
+                            <input placeholder='Billing Address' type="text" name="" id="address" />
+                        </div>
+
+                        <div className="bill-info">
+                            <p>Bill from:</p>
+
+                            <input placeholder='Who is this invoice to?' type="text" name="invoice-to" id="bill-from" />
+                            <input placeholder='Email address' type="text" name="" id="email" />
+                            <input placeholder='Billing Address' type="text" name="" id="address" />
+                        </div>
+                    </div>
                 </form>
             </div>
 
