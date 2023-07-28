@@ -4,23 +4,71 @@
 
 .form-main {
     flex: 0.7;
-
-    display: flex;
 }
 
 .invoice-form {
-    padding: 2rem;
+    background-color: var(--white);
+
+    padding: 2.5rem;
     width: 90%;
-    border: 1px solid red;
+    border: 1px solid var(--white-2);
     margin-left: auto;
     margin-right: 1rem;
     margin-top: 1rem;
+    margin-bottom: 1rem;
+
+    border-radius: 0.5rem;
 }
+
+.invoice-form hr {
+    margin: 2rem 0;
+    border-top: 1px solid var(--white-2);
+}
+
+/* Form Date Section */
 
 .form-date-section {
     display: flex;
     justify-content: space-between;
 }
+
+.form-dates {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-dates p {
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.form-dates p span {
+    font-weight: 500;
+}
+
+.due-date-input label {
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.due-date-input input {
+    margin-left: 0.5rem;
+}
+
+.invoice-number-input label {
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.invoice-number-input input {
+    margin-left: 0.5rem;
+    width: 4rem;
+    padding: 0.55rem 0.5rem;
+    font-size: 0.8rem;
+}
+
+/* Form Bill info Section */
 
 .form-bill-info-section {
     display: flex;
@@ -31,6 +79,179 @@
     flex: 0.5;
     display: flex;
     flex-direction: column;
+    gap: 0.5rem;
+}
+
+.bill-info p {
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.bill-info input {
+    padding: 0.65rem 0.5rem;
+    font-size: 0.8rem;
+}
+
+/* Form Items Section */
+
+.list-header {
+    margin-top: 3rem;
+    display: flex;
+    border-top: 1px solid var(--white-2);
+    border-bottom: 1px solid var(--white-2);
+    padding: 0.5rem 0;
+
+    text-transform: uppercase;
+}
+
+.list-header p {
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.header-item-title {
+    flex: 0.65;
+}
+
+.header-item-quantity, .header-item-action {
+    flex: 0.1;
+}
+
+.header-item-rate {
+    flex: 0.15;
+}
+
+.items-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-item {
+    display: flex;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--white-2);
+}
+
+.form-item input {
+    padding: 0.65rem 0.5rem;
+    font-size: 0.8rem;
+}
+
+.item-info {
+    width: 65%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+
+    padding-right: 0.5rem;
+}
+
+.item-quantity {
+    padding: 0 0.5rem;
+}
+
+.item-quantity, .delete-item-button-container {
+    width: 10%;
+}
+
+.item-rate {
+    width: 15%;
+    padding: 0 0.5rem;
+}
+
+.item-rate > input, .item-quantity > input {
+    width: 100%;
+}
+
+.delete-item-button-container {
+    display: flex;
+    justify-content: center;
+}
+
+.delete-item-button {
+    height: fit-content;
+}
+
+.add-item-button {
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    color: var(--white);
+    background-color: var(--blue);
+    margin-top: 1rem;
+}
+
+.add-item-button:hover {
+    background-color: var(--dark-blue);
+}
+
+/* Form Totals Section */
+
+.form-totals {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    /* margin-left: auto; */
+    margin: 1rem 0 1rem auto;
+}
+
+.form-totals div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.subtotal-info > p, 
+.discount-info > p, 
+.tax-info > p {
+    font-size: 0.75rem;
+}
+
+.subtotal-info > p:first-child, 
+.discount-info > p:first-child, 
+.tax-info > p:first-child {
+    font-weight: 700;
+}
+
+.total-info p {
+    font-weight: 700;
+}
+
+.form-totals hr {
+    margin-top: 0.25rem;
+    margin-bottom: 0.75rem;
+    border: 1px solid var(--white-2);
+}
+
+.form-totals div:last-child {
+    margin-top: -0.5rem;
+}
+
+/* Bill Note Section */
+
+.bill-note-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.bill-note-section label {
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.bill-note-section textarea {
+    padding-top: 0.65rem;
+    padding-left: 0.75rem;
+    font-size: 0.8rem;
+    border: none;
+    outline: none;
+    background-color: var(--white-1);
+    border-radius: 0.25rem;
+    resize: vertical;
+    min-height: 2.5rem;
 }
 
 .form-review-section {
