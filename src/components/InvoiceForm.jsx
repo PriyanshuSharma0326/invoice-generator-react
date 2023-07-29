@@ -1,5 +1,7 @@
 import React from 'react';
 import '../styles/InvoiceForm.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBucket } from '@fortawesome/free-solid-svg-icons';
 
 function InvoiceForm() {
     return (
@@ -71,7 +73,9 @@ function InvoiceForm() {
                                 </div>
 
                                 <div className="delete-item-button-container">
-                                    <button className="delete-item-button">del</button>
+                                    <button className="delete-item-button">
+                                        <FontAwesomeIcon className='bucket-icon' icon={faBucket} />
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -116,7 +120,22 @@ function InvoiceForm() {
             </div>
 
             <div className='form-review-section'>
-                Review
+                <div className="review-button-container">
+                    <button className="review-button">
+                        Review
+                    </button>
+                </div>
+
+                <hr />
+
+                <div className="currency-section">
+                    <label htmlFor="currency">Currency: </label>
+
+                    <select name="" id="currency">
+                        <option value="dollar">Dollar</option>
+                        <option value="rupee">Rupee</option>
+                    </select>
+                </div>
             </div>
         </div>
     );
