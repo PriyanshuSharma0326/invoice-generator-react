@@ -1,9 +1,55 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../styles/InvoiceForm.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBucket } from '@fortawesome/free-solid-svg-icons';
+import InvoiceItem from './InvoiceItem';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faBucket } from '@fortawesome/free-solid-svg-icons';
 
 function InvoiceForm() {
+    const getDate = () => {
+        const currentDate = new Date();
+        const month = currentDate.getMonth() + 1;
+        const day = currentDate.getDate();
+        const year = currentDate.getFullYear();
+
+        const formattedDate = `${month}/${day}/${year}`;
+        return formattedDate;
+    }
+
+    let item = {
+        itemName: '',
+        itemDescription: '',
+        itemQuantity: 1,
+        itemPrice: 1
+    };
+
+    const [itemList, setItemList] = useState([
+        item,
+        item
+    ]);
+
+    const addNewItem = () => {
+        setItemList([...itemList, item]);
+    }
+
+    const [formInputs, setFormInputs] = useState({
+        invoiceNumber: 1,
+        dueDate: null,
+        receiverName: '',
+        receiverEmail: '',
+        receiverAddress: '',
+        senderName: '',
+        senderEmail: '',
+        senderAddress: '',
+        additionalNote: ''
+    });
+
+    const inputHandler = (e) => {
+        setFormInputs({
+            ...formInputs, 
+            [e.target.name]: e.target.value
+        });
+    }
+
     return (
         <div className='form-container'>
             <div className='form-main'>
@@ -11,20 +57,27 @@ function InvoiceForm() {
                     <div className="form-date-section">
                         <div className="form-dates">
                             <p>
-                                Current Date: <span id='current-date'>17/6/23</span>
+                                Current Date: <span id='current-date'>{getDate()}</span>
                             </p>
 
                             <div className="due-date-input">
                                 <label htmlFor="due-date">Due Date:</label>
 
-                                <input type="date" name="due-date" id="due-date" />
+                                <input type="date" name="dueDate" id="due-date" />
                             </div>
                         </div>
 
                         <div className="invoice-number-input">
                             <label htmlFor="invoice-number">Invoice Number:</label>
 
-                            <input min={1} type="number" name="invoice-number" id="invoice-number" />
+                            <input 
+                                min={1} 
+                                type="number" 
+                                name="invoiceNumber" 
+                                id="invoice-number" 
+                                value={formInputs.invoiceNumber} 
+                                onChange={inputHandler} 
+                            />
                         </div>
                     </div>
 
@@ -34,17 +87,55 @@ function InvoiceForm() {
                         <div className="bill-info">
                             <p>Bill to:</p>
 
-                            <input placeholder='Who is this invoice to?' type="text" name="invoice-to" id="bill-to" />
-                            <input placeholder='Email address' type="text" name="" id="email" />
-                            <input placeholder='Billing Address' type="text" name="" id="address" />
+                            <input 
+                                placeholder='Who is this invoice to?' 
+                                type="text" 
+                                name="receiverName" 
+                                id="bill-to" 
+                                value={formInputs.receiverName} 
+                                onChange={inputHandler} 
+                            />
+                            <input 
+                                placeholder='Email address' type="text" 
+                                name="receiverEmail" 
+                                id="email" 
+                                value={formInputs.receiverEmail} 
+                                onChange={inputHandler} 
+                            />
+                            <input 
+                                placeholder='Billing Address' type="text" 
+                                name="receiverAddress" 
+                                id="address" 
+                                value={formInputs.receiverAddress} 
+                                onChange={inputHandler} 
+                            />
                         </div>
 
                         <div className="bill-info">
                             <p>Bill from:</p>
 
-                            <input placeholder='Who is this invoice to?' type="text" name="invoice-to" id="bill-from" />
-                            <input placeholder='Email address' type="text" name="" id="email" />
-                            <input placeholder='Billing Address' type="text" name="" id="address" />
+                            <input 
+                                placeholder='Who is this invoice from?' 
+                                type="text" 
+                                name="senderName" 
+                                id="bill-from" 
+                                value={formInputs.senderName} 
+                                onChange={inputHandler} 
+                                />
+                            <input 
+                                placeholder='Email address' type="text" 
+                                name="senderEmail" 
+                                id="email" 
+                                value={formInputs.senderEmail} 
+                                onChange={inputHandler} 
+                            />
+                            <input 
+                                placeholder='Billing Address' type="text" 
+                                name="senderAddress" 
+                                id="address" 
+                                value={formInputs.senderAddress} 
+                                onChange={inputHandler} 
+                            />
                         </div>
                     </div>
 
@@ -57,30 +148,16 @@ function InvoiceForm() {
                         </div>
 
                         <div className="items-container">
-                            <div className="form-item">
-                                <div className="item-info">
-                                    <input placeholder='Item name' type="text" name="" id="" />
-                                    
-                                    <input placeholder='Item description' type="text" name="" id="" />
-                                </div>
-
-                                <div className="item-quantity">
-                                    <input value={1} type="number" name="" id="" />
-                                </div>
-
-                                <div className="item-rate">
-                                    <input value={1.00} type="number" name="" id="" />
-                                </div>
-
-                                <div className="delete-item-button-container">
-                                    <button className="delete-item-button">
-                                        <FontAwesomeIcon className='bucket-icon' icon={faBucket} />
-                                    </button>
-                                </div>
-                            </div>
+                            {itemList.map(item => {
+                                return (
+                                    <InvoiceItem 
+                                        {...item}
+                                    />
+                                );
+                            })}
                         </div>
 
-                        <button className="add-item-button">Add item</button>
+                        <button className="add-item-button" onClick={addNewItem}>Add item</button>
                     </div>
 
                     <div className="form-totals">
@@ -114,7 +191,7 @@ function InvoiceForm() {
                     <div className="bill-note-section">
                         <label htmlFor="bill-note">Notes:</label>
                         
-                        <textarea id="bill-note" name="bill-note" placeholder='Thanks for your business!'></textarea>
+                        <textarea id="bill-note" name="additionalNote" placeholder='Thanks for your business!'></textarea>
                     </div>
                 </form>
             </div>
@@ -122,7 +199,7 @@ function InvoiceForm() {
             <div className='form-review-section'>
                 <div className="review-button-container">
                     <button className="review-button">
-                        Review
+                        Review Invoice
                     </button>
                 </div>
 
@@ -132,9 +209,33 @@ function InvoiceForm() {
                     <label htmlFor="currency">Currency: </label>
 
                     <select name="" id="currency">
-                        <option value="dollar">Dollar</option>
-                        <option value="rupee">Rupee</option>
+                        <option value="usd">USD (United States Dollar)</option>
+                        <option value="gbp">GBP (British Pound Sterling)</option>
+                        <option value="cad">CAD (Canadian Dollar)</option>
+                        <option value="aud">AUD (Australian Dollar)</option>
+                        <option value="sgd">SGD (Singapore Dollar)</option>
+                        <option value="jpy">JPY (Japanese Yen)</option>
+                        <option value="cny">CNY (Chinese Renminbi)</option>
+                        <option value="inr">INR (Indian Rupee)</option>
+                        <option value="btc">BTC (Bitcoin)</option>
+                        <option value="doge">DOGE (Dogecoin)</option>
                     </select>
+                </div>
+
+                <div className="tax-input">
+                    <label htmlFor="tax-rate">Tax rate: </label>
+
+                    <div className="tax-input-container">
+                        <input type="number" name="" id="tax-rate" />
+                    </div>
+                </div>
+
+                <div className="discount-input">
+                    <label htmlFor="discount-rate">Discount rate: </label>
+
+                    <div className="discount-input-container">
+                        <input type="number" name="" id="discount-rate" />
+                    </div>
                 </div>
             </div>
         </div>
