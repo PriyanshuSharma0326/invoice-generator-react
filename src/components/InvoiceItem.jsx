@@ -3,6 +3,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBucket } from '@fortawesome/free-solid-svg-icons';
 
 function InvoiceItem({ itemName, itemDescription, itemQuantity, itemPrice }) {
+    const handleChange = (e) => {
+        console.log(e);
+    }
+
     return (
         <div className="form-item">
             <div className="item-info">
@@ -11,7 +15,8 @@ function InvoiceItem({ itemName, itemDescription, itemQuantity, itemPrice }) {
                     type="text" 
                     name="" 
                     id="" 
-                    value={itemName}
+                    value={itemName} 
+                    onChange={handleChange} 
                 />                    
                 <input 
                     placeholder='Item description' 
@@ -19,6 +24,7 @@ function InvoiceItem({ itemName, itemDescription, itemQuantity, itemPrice }) {
                     name="" 
                     id="" 
                     value={itemDescription} 
+                    onChange={handleChange} 
                 />
             </div>
 
@@ -28,6 +34,7 @@ function InvoiceItem({ itemName, itemDescription, itemQuantity, itemPrice }) {
                     type="number" 
                     name="" 
                     id="" 
+                    onChange={handleChange} 
                 />
             </div>
 
@@ -37,6 +44,7 @@ function InvoiceItem({ itemName, itemDescription, itemQuantity, itemPrice }) {
                     type="number" 
                     name="" 
                     id="" 
+                    onChange={handleChange} 
                 />
             </div>
 

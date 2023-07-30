@@ -19,16 +19,18 @@ function InvoiceForm() {
         itemName: '',
         itemDescription: '',
         itemQuantity: 1,
-        itemPrice: 1
+        itemPrice: 1,
+        itemID: Date.now()
     };
 
     const [itemList, setItemList] = useState([
-        item,
         item
     ]);
 
-    const addNewItem = () => {
-        setItemList([...itemList, item]);
+    const addNewItem = (e) => {
+        e.preventDefault();
+
+        setItemList(prev => [...prev, item]);
     }
 
     const [formInputs, setFormInputs] = useState({
@@ -151,6 +153,7 @@ function InvoiceForm() {
                             {itemList.map(item => {
                                 return (
                                     <InvoiceItem 
+                                        key={item.itemID} 
                                         {...item}
                                     />
                                 );
