@@ -1,10 +1,26 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBucket } from '@fortawesome/free-solid-svg-icons';
 
-function InvoiceItem({ itemName, itemDescription, itemQuantity, itemPrice }) {
+import { ItemsContext } from '../context/ItemsContext';
+
+function InvoiceItem({ itemID, itemName, itemDescription, itemQuantity, itemPrice }) {
+    const { removeFromList } = useContext(ItemsContext);
+
+    let [itemInputs, setItemInputs] = useState({
+        itemName: itemName,
+        itemDescription: itemDescription,
+        itemQuantity: itemQuantity,
+        itemPrice: itemPrice,
+    });
+
     const handleChange = (e) => {
-        console.log(e);
+        e.preventDefault();
+
+        setItemInputs({
+            ...itemInputs, 
+            [e.target.name]: e.target.value
+        });
     }
 
     return (
@@ -13,43 +29,47 @@ function InvoiceItem({ itemName, itemDescription, itemQuantity, itemPrice }) {
                 <input 
                     placeholder='Item name' 
                     type="text" 
-                    name="" 
-                    id="" 
-                    value={itemName} 
+                    name="itemName" 
+                    value={itemInputs.itemName} 
                     onChange={handleChange} 
-                />                    
+                />
                 <input 
                     placeholder='Item description' 
                     type="text" 
-                    name="" 
-                    id="" 
-                    value={itemDescription} 
+                    name="itemDescription" 
+                    value={itemInputs.itemDescription} 
                     onChange={handleChange} 
                 />
             </div>
 
             <div className="item-quantity">
                 <input 
-                    value={itemQuantity} 
+                    value={itemInputs.itemQuantity} 
                     type="number" 
-                    name="" 
-                    id="" 
+                    name="itemQuantity" 
                     onChange={handleChange} 
+                    min={0} 
                 />
             </div>
 
             <div className="item-rate">
                 <input 
-                    value={itemPrice} 
+                    value={itemInputs.itemPrice} 
                     type="number" 
-                    name="" 
-                    id="" 
+                    name="itemPrice" 
                     onChange={handleChange} 
+                    min={0} 
                 />
             </div>
 
             <div className="delete-item-button-container">
-                <button className="delete-item-button">
+                <button 
+                    className="delete-item-button" 
+                    onClick={(e) => {
+                        e.preventDefault();
+                        removeFromList(itemID);
+                    }} 
+                >
                     <FontAwesomeIcon className='bucket-icon' icon={faBucket} />
                 </button>
             </div>

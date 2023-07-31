@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import '../styles/InvoiceForm.css';
 import InvoiceItem from './InvoiceItem';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faBucket } from '@fortawesome/free-solid-svg-icons';
+
+import { ItemsContext } from '../context/ItemsContext';
 
 function InvoiceForm() {
+    const { itemList, addToList, getSubtotalAmount } = useContext(ItemsContext);
+
     const getDate = () => {
         const currentDate = new Date();
         const month = currentDate.getMonth() + 1;
@@ -15,22 +17,9 @@ function InvoiceForm() {
         return formattedDate;
     }
 
-    let item = {
-        itemName: '',
-        itemDescription: '',
-        itemQuantity: 1,
-        itemPrice: 1,
-        itemID: Date.now()
-    };
-
-    const [itemList, setItemList] = useState([
-        item
-    ]);
-
     const addNewItem = (e) => {
         e.preventDefault();
-
-        setItemList(prev => [...prev, item]);
+        addToList();
     }
 
     const [formInputs, setFormInputs] = useState({
@@ -154,7 +143,7 @@ function InvoiceForm() {
                                 return (
                                     <InvoiceItem 
                                         key={item.itemID} 
-                                        {...item}
+                                        {...item} 
                                     />
                                 );
                             })}
@@ -167,7 +156,7 @@ function InvoiceForm() {
                         <div className="subtotal-info">
                             <p>Subtotal:</p>
 
-                            <p className="subtotal">$1.00</p>
+                            <p className="subtotal">${getSubtotalAmount()}</p>
                         </div>
                         <div className="discount-info">
                             <p>Discount:</p>
